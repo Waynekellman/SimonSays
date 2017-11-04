@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton button_play;
     private Button button_green, button_blue, button_yellow, button_red;
 
-    final Animation lightup = new AlphaAnimation(0,1);
-    final Animation lightup1 = new AlphaAnimation(0,1);
-    final Animation lightup2 = new AlphaAnimation(0,1);
-    final Animation lightup3 = new AlphaAnimation(0,1);
+    final Animation lightup = new AlphaAnimation(0, 1);
+    final Animation lightup1 = new AlphaAnimation(0, 1);
+    final Animation lightup2 = new AlphaAnimation(0, 1);
+    final Animation lightup3 = new AlphaAnimation(0, 1);
 
 
     static Handler handler;
@@ -47,6 +47,24 @@ public class MainActivity extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/bromo.otf");
         myTextView.setTypeface(typeface);
 
+        setViews();
+        handler = new Handler();
+        setVisibilities();
+        setLightUpDuration();
+
+
+    }
+
+    public void setLightUpDuration(){
+        lightup.setDuration(1000);
+        lightup1.setDuration(1000);
+        lightup2.setDuration(1000);
+        lightup3.setDuration(1000);
+
+    }
+
+    public void setViews() {
+
         green_dino = findViewById(R.id.green_dino);
         blue_dino = findViewById(R.id.blue_dino);
         yellow_dino = findViewById(R.id.yellow_dino);
@@ -56,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
         button_blue = findViewById(R.id.button_blue);
         button_yellow = findViewById(R.id.button_yellow);
         button_red = findViewById(R.id.button_red);
-        handler = new Handler();
+    }
+
+
+    public void setVisibilities() {
         green_dino.setVisibility(View.INVISIBLE);
         blue_dino.setVisibility(View.INVISIBLE);
         yellow_dino.setVisibility(View.INVISIBLE);
@@ -65,12 +86,10 @@ public class MainActivity extends AppCompatActivity {
         button_blue.setVisibility(View.INVISIBLE);
         button_yellow.setVisibility(View.INVISIBLE);
         button_red.setVisibility(View.INVISIBLE);
-        lightup.setDuration(1000);
-        lightup1.setDuration(1000);
-        lightup2.setDuration(1000);
-        lightup3.setDuration(1000);
 
     }
+
+
     public LinkedList<ImageView> startAnimations(int n) {
         final ArrayList<ImageView> img = new ArrayList<>();
         img.add(green_dino);
@@ -84,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             final int r = random.nextInt(n);
             imghold.add(img.get(r));
 
-            if (img.get(r).equals(green_dino)){
+            if (img.get(r).equals(green_dino)) {
 
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -92,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         green_dino.startAnimation(lightup);
                     }
                 }, 1000 * i);
-            } else if (img.get(r).equals(blue_dino)){
+            } else if (img.get(r).equals(blue_dino)) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -100,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 1000 * i);
 
-            } else if (img.get(r).equals(yellow_dino)){
+            } else if (img.get(r).equals(yellow_dino)) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -108,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 1000 * i);
 
-            } else if (img.get(r).equals(red_dino)){
+            } else if (img.get(r).equals(red_dino)) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -133,22 +152,22 @@ public class MainActivity extends AppCompatActivity {
             button_blue.setVisibility(View.VISIBLE);
             button_yellow.setVisibility(View.VISIBLE);
             button_red.setVisibility(View.VISIBLE);
-        } else if (v == button_green){
+        } else if (v == button_green) {
             v.startAnimation(lightup);
             colorCheck("green");
-        } else if (v == button_blue){
+        } else if (v == button_blue) {
             v.startAnimation(lightup1);
             colorCheck("blue");
-        } else if (v == button_yellow){
+        } else if (v == button_yellow) {
             v.startAnimation(lightup2);
             colorCheck("yellow");
-        }else if (v == button_red){
+        } else if (v == button_red) {
             v.startAnimation(lightup3);
             colorCheck("red");
         }
     }
 
-    public LinkedList<ImageView> gameStart(int n){
+    public LinkedList<ImageView> gameStart(int n) {
         LinkedList<ImageView> img = startAnimations(n);
         for (int i = 0; i < img.size(); i++) {
             if (img.get(i).equals(green_dino)) {
@@ -165,63 +184,63 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void colorCheck(String v){
-        if (v.equals("green")){
+    public void colorCheck(String v) {
+        if (v.equals("green")) {
             try {
                 if (flashes.get(itterateImages).equals(green_dino)) {
-                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,  (itterateImages + 1)+ " Correct !" , Toast.LENGTH_SHORT).show();
 //                    button_play.setVisibility(View.VISIBLE);
-                }else {
-                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this,   "Incorrect !" , Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
-            }catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
 
             }
 
-        }else if (v.equals("blue")){
+        } else if (v.equals("blue")) {
             try {
                 if (flashes.get(itterateImages).equals(blue_dino)) {
-                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, (itterateImages + 1)+ " Correct !", Toast.LENGTH_SHORT).show();
 //                    button_play.setVisibility(View.VISIBLE);
-                }else {
-                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Incorrect !", Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
-            }catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
 
             }
-        }else if (v.equals("yellow")){
+        } else if (v.equals("yellow")) {
             try {
                 if (flashes.get(itterateImages).equals(yellow_dino)) {
-                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, (itterateImages + 1)+ " Correct !", Toast.LENGTH_SHORT).show();
 //                    button_play.setVisibility(View.VISIBLE);
-                }else {
-                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Incorrect !", Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
-            }catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
 
             }
-        }else if (v.equals("red")){
+        } else if (v.equals("red")) {
             try {
                 if (flashes.get(itterateImages).equals(red_dino)) {
-                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, (itterateImages + 1)+ " Correct !", Toast.LENGTH_SHORT).show();
 //                    button_play.setVisibility(View.VISIBLE);
-                }else {
-                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Incorrect !", Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
-            }catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
 
             }
         }
 
-        if(itterateImages == flashes.size()) {
+        if (itterateImages == flashes.size()) {
             button_play.setVisibility(View.VISIBLE);
         }
 
