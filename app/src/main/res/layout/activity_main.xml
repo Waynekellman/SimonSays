@@ -55,12 +55,14 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#44e300"
+            android:onClick="buttonPress"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/button_blue"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#1e04e6"
+            android:onClick="buttonPress"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -96,12 +98,14 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#ffed24"
+            android:onClick="buttonPress"
             android:layout_weight="1" />
         <Button
             android:id="@+id/button_red"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#ff4d17"
+            android:onClick="buttonPress"
             android:layout_weight="1"/>
     </LinearLayout>
 
