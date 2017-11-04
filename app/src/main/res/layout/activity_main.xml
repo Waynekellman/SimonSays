@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundw"
     android:padding="20dp"
-
-
     android:orientation="vertical">
 
     <TextView
@@ -17,70 +15,113 @@
         android:text="Dino Says"
         android:textColor="#77aaff"
         android:backgroundTint="#333E50"
-        android:textSize="100sp"
+        android:textSize="50sp"
         android:textStyle="bold"
-        android:layout_weight=".15"
+        android:layout_weight=".25"
         android:id="@+id/textView" />
-<LinearLayout
-    android:layout_height="0dp"
-    android:layout_width="wrap_content"
-    android:layout_weight=".375"
-    android:orientation="horizontal"
-    >
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_weight=".55"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:gravity="center">
 
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/green_dino"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight=".50"
+            app:srcCompat="@drawable/greensmalldino" />
+
+        <ImageView
+            android:id="@+id/blue_dino"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight=".50"
+            app:srcCompat="@drawable/bluedino" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        android:layout_weight=".50"
-        app:srcCompat="@drawable/greensmalldino"
-        />
+        <Button
+            android:id="@+id/button_green"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#44e300"
+            android:onClick="buttonPress"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/button_blue"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#1e04e6"
+            android:onClick="buttonPress"
+            android:layout_weight="1"/>
 
-    <ImageView
-        android:paddingTop="50dp"
-        android:id="@+id/imageView2"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:layout_weight=".50"
-        app:srcCompat="@drawable/bluedino" />
-
-
-</LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight=".375">
+        android:layout_weight=".55"
+        android:gravity="center">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/yellow_dino"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight=".50"
-            app:srcCompat="@drawable/yellowdino"
-
-            />
+            app:srcCompat="@drawable/yellowdino"/>
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_height="wrap_content"
+            android:id="@+id/red_dino"
             android:layout_width="0dp"
+            android:layout_height="100dp"
             android:layout_weight=".50"
             app:srcCompat="@drawable/reddino" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
 
+        <Button
+            android:id="@+id/button_yellow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#ffed24"
+            android:onClick="buttonPress"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/button_red"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#ff4d17"
+            android:onClick="buttonPress"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_weight=".3">
+
+    <ImageButton
+        android:id="@+id/button_play"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="buttonPress"
+        app:srcCompat="@drawable/dinoplay" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/dinoplay"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:srcCompat="@drawable/dinoplay"
-        android:layout_weight=".15"/>
 
 </LinearLayout>
