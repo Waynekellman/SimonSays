@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     final Animation lightup2 = new AlphaAnimation(0, 1);
     final Animation lightup3 = new AlphaAnimation(0, 1);
 
+    private int correct = 0;
+    private int incorrect = 0;
+
+    private int numOfGames = 1;
+
+    LinkedList<ImageView> imgHold = new LinkedList<>();
 
     static Handler handler;
 
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private LinkedList<ImageView> flashes;
 
     private int itterateImages = 0;
+
+
 
 
     @Override
@@ -97,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
         img.add(yellow_dino);
         img.add(red_dino);
 
-        final LinkedList<ImageView> imghold = new LinkedList<>();
+
+        final int r = random.nextInt(n);
+        imgHold.add(img.get(r));
 
         for (int i = 0; i < n; i++) {
-            final int r = random.nextInt(n);
-            imghold.add(img.get(r));
 
-            if (img.get(r).equals(green_dino)) {
+            if (imgHold.get(i).equals(green_dino)){
 
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -111,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
                         green_dino.startAnimation(lightup);
                     }
                 }, 1000 * i);
-            } else if (img.get(r).equals(blue_dino)) {
+
+            } else if (imgHold.get(i).equals(blue_dino)){
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -119,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 1000 * i);
 
-            } else if (img.get(r).equals(yellow_dino)) {
+            } else if (imgHold.get(i).equals(yellow_dino)){
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -127,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 1000 * i);
 
-            } else if (img.get(r).equals(red_dino)) {
+            } else if (imgHold.get(i).equals(red_dino)){
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -138,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        return imghold;
+        return imgHold;
     }
 
     public void buttonPress(View v) {
@@ -146,7 +155,9 @@ public class MainActivity extends AppCompatActivity {
         if (v == button_play) {
             flashes = new LinkedList<>();
             itterateImages = 0;
-            flashes = gameStart(3);
+            correct = 0;
+            incorrect = 0;
+            flashes = gameStart(numOfGames);
             button_play.setVisibility(View.INVISIBLE);
             button_green.setVisibility(View.VISIBLE);
             button_blue.setVisibility(View.VISIBLE);
@@ -184,14 +195,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void colorCheck(String v) {
-        if (v.equals("green")) {
+    public boolean colorCheck(String v){
+        if (v.equals("green")){
             try {
                 if (flashes.get(itterateImages).equals(green_dino)) {
-                    Toast.makeText(MainActivity.this,  (itterateImages + 1)+ " Correct !" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    correct++;
 //                    button_play.setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(MainActivity.this,   "Incorrect !" , Toast.LENGTH_SHORT).show();
+                }else {
+                    incorrect++;
+                    gameResults();
                 }
                 itterateImages++;
 
@@ -202,10 +215,12 @@ public class MainActivity extends AppCompatActivity {
         } else if (v.equals("blue")) {
             try {
                 if (flashes.get(itterateImages).equals(blue_dino)) {
-                    Toast.makeText(MainActivity.this, (itterateImages + 1)+ " Correct !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    correct++;
 //                    button_play.setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(MainActivity.this, "Incorrect !", Toast.LENGTH_SHORT).show();
+                }else {
+                    incorrect++;
+                    gameResults();
                 }
                 itterateImages++;
 
@@ -215,10 +230,12 @@ public class MainActivity extends AppCompatActivity {
         } else if (v.equals("yellow")) {
             try {
                 if (flashes.get(itterateImages).equals(yellow_dino)) {
-                    Toast.makeText(MainActivity.this, (itterateImages + 1)+ " Correct !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    correct++;
 //                    button_play.setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(MainActivity.this, "Incorrect !", Toast.LENGTH_SHORT).show();
+                }else {
+                    incorrect++;
+                    gameResults();
                 }
                 itterateImages++;
 
@@ -228,10 +245,12 @@ public class MainActivity extends AppCompatActivity {
         } else if (v.equals("red")) {
             try {
                 if (flashes.get(itterateImages).equals(red_dino)) {
-                    Toast.makeText(MainActivity.this, (itterateImages + 1)+ " Correct !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
+                    correct++;
 //                    button_play.setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(MainActivity.this, "Incorrect !", Toast.LENGTH_SHORT).show();
+                }else {
+                    incorrect++;
+                    gameResults();
                 }
                 itterateImages++;
 
@@ -241,9 +260,42 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (itterateImages == flashes.size()) {
-            button_play.setVisibility(View.VISIBLE);
+            gameResults();
         }
 
+        return false;
+    }
+
+    public void gameResults(){
+        if(itterateImages == flashes.size()) {
+            button_play.setVisibility(View.VISIBLE);
+            button_green.setVisibility(View.INVISIBLE);
+            button_blue.setVisibility(View.INVISIBLE);
+            button_yellow.setVisibility(View.INVISIBLE);
+            button_red.setVisibility(View.INVISIBLE);
+            if(correct == flashes.size()){
+                if (correct != 4) {
+                    Toast.makeText(MainActivity.this, "You win! Next game is one more!", Toast.LENGTH_SHORT).show();
+                    numOfGames++;
+                } else {
+                    Toast.makeText(MainActivity.this, "Game is complete! Resetting", Toast.LENGTH_SHORT).show();
+                    numOfGames = 1;
+                    itterateImages = 0;
+                    correct = 0;
+                    incorrect = 0;
+                    imgHold = new LinkedList<>();
+                }
+
+            } else if (incorrect > 0) {
+                Toast.makeText(MainActivity.this, "incorrect start over ", Toast.LENGTH_SHORT).show();
+                numOfGames = 1;
+                itterateImages = 0;
+                correct = 0;
+                incorrect = 0;
+                imgHold = new LinkedList<>();
+            }
+
+        }
     }
 
 
