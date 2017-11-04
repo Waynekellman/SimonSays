@@ -72,39 +72,14 @@ public class MainActivity extends AppCompatActivity {
             final int r = random.nextInt(n);
             imghold.add(img.get(r));
 
-            if (img.get(r).equals(green_dino)){
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        green_dino.startAnimation(lightup);
-                    }
-                }, 1000 * i);
-            } else if (img.get(r).equals(blue_dino)){
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        blue_dino.startAnimation(lightup);
+                        img.get(r).startAnimation(lightup);
                     }
                 }, 1000 * i);
 
-            } else if (img.get(r).equals(yellow_dino)){
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        yellow_dino.startAnimation(lightup);
-                    }
-                }, 1000 * i);
-
-            } else if (img.get(r).equals(red_dino)){
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        red_dino.startAnimation(lightup);
-                    }
-                }, 1000 * i);
-
-            }
         }
 
         return imghold;
@@ -115,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if (v == button_play) {
             flashes = new LinkedList<>();
             itterateImages = 0;
-            flashes = gameStart();
+            flashes = gameStart(3);
         } else if (v == button_green){
             colorCheck("green");
         } else if (v == button_blue){
@@ -127,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public LinkedList<ImageView> gameStart(){
-        LinkedList<ImageView> img = startAnimations(4);
+    public LinkedList<ImageView> gameStart(int n){
+        LinkedList<ImageView> img = startAnimations(n);
         for (int i = 0; i < img.size(); i++) {
             if (img.get(i).equals(green_dino)) {
                 System.out.println("green");
@@ -148,10 +123,10 @@ public class MainActivity extends AppCompatActivity {
         if (v.equals("green")){
             try {
                 if (flashes.get(itterateImages).equals(green_dino)) {
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                     button_play.setVisibility(View.VISIBLE);
                 }else {
-                    Toast.makeText(MainActivity.this, "incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
@@ -162,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
         }else if (v.equals("blue")){
             try {
                 if (flashes.get(itterateImages).equals(blue_dino)) {
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                     button_play.setVisibility(View.VISIBLE);
                 }else {
-                    Toast.makeText(MainActivity.this, "incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
@@ -175,10 +150,10 @@ public class MainActivity extends AppCompatActivity {
         }else if (v.equals("yellow")){
             try {
                 if (flashes.get(itterateImages).equals(yellow_dino)) {
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                     button_play.setVisibility(View.VISIBLE);
                 }else {
-                    Toast.makeText(MainActivity.this, "incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
@@ -188,10 +163,10 @@ public class MainActivity extends AppCompatActivity {
         }else if (v.equals("red")){
             try {
                 if (flashes.get(itterateImages).equals(red_dino)) {
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "correct " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                     button_play.setVisibility(View.VISIBLE);
                 }else {
-                    Toast.makeText(MainActivity.this, "incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "incorrect " + (itterateImages + 1), Toast.LENGTH_SHORT).show();
                 }
                 itterateImages++;
 
