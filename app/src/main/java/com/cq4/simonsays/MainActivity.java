@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         img.add(red_dino);
 
 
-        final int r = random.nextInt(n);
+        final int r = random.nextInt(4);
         imgHold.add(img.get(r));
 
         for (int i = 0; i < n; i++) {
